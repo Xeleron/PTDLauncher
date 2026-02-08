@@ -1,0 +1,42 @@
+.image-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s;
+  width: 160px; /* Match legacy width */
+  height: 70px; /* Match legacy height */
+}
+
+.image-button:active {
+  transform: translateY(2px);
+}
+
+.image-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.image-button-label {
+  position: relative;
+  z-index: 2;
+  color: white;
+  font-family: inherit; /* Use global font (Arial in legacy, Outfit here) */
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  margin-top: -2px; /* Visual adjustment */
+  text-align: center;
+  line-height: 1.2;
+}

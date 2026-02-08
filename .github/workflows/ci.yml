@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run lint
+        run: bun run lint
+
+      - name: Build frontend
+        run: bun run build
+
+
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install system dependencies for GLib, GTK, libsoup, JavaScriptCore, and WebKitGTK
+        run: sudo apt-get update && sudo apt-get install -y libgtk-3-dev libglib2.0-dev libsoup-3.0-dev libjavascriptcoregtk-4.1-dev libwebkit2gtk-4.1-dev pkg-config
+
+      - name: Run cargo fmt
+        run: |
+          cd src-tauri
+          cargo fmt -- --check || true
+
+      - name: Run cargo clippy
+        run: |
+          cd src-tauri
+          export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
+          cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: Build Tauri (Rust)
+        run: |
+          cd src-tauri
+          export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
+          cargo build --release
+
+

@@ -2970,11 +2970,12 @@ dependencies = [
 
 [[package]]
 name = "ptdlauncher"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "chrono",
  "dirs",
  "flate2",
+ "fs_extra",
  "futures-util",
  "regex",
  "reqwest",

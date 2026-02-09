@@ -1,6 +1,6 @@
 [package]
 name = "ptdlauncher"
-version = "0.1.0"
+version = "0.1.1"
 description = "A Tauri App for Pokemon Tower Defense"
 authors = ["d8l8b"]
 license = "MIT"
@@ -34,6 +34,7 @@ chrono = "0.4"
 regex = "1"
 walkdir = "2.5.0"
 zip = "7.4.0"
+fs_extra = "1.3"
 
 [profile.release]
 codegen-units = 1
